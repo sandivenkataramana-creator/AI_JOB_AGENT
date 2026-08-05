@@ -1,26 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual Environment
+venv/
+
+# Environment
+.env
+
 # Logs
 logs/
 *.log
 
-# Local environment
-.env
-.env.*
+# VS Code
+.vscode/
 
-# OS junk
-Thumbs.db
-.DS_Store
-# AI Job Agent
+# JetBrains
+.idea/
 
-An AI-powered job search and application assistant.
+# Temporary files
+backend/test_hash.py
 
-## Tech Stack
-
-- FastAPI
-- PostgreSQL
-- React
-- Playwright
-- OpenAI API
-
-## Status
-
-Phase 1 - Project Setup
+# Node
+node_modules/
+dist/
+build/
