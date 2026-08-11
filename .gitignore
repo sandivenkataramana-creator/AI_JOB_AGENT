@@ -26,3 +26,8 @@ backend/test_hash.py
 node_modules/
 dist/
 build/
+
+# Uploaded resumes
+/backend/app/storage/resumes/*.pdf
+/backend/app/storage/resumes/*.doc
+/backend/app/storage/resumes/*.docx
