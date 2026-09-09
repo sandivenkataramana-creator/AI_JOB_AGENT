@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 
 class JobSearchRequest(BaseModel):
@@ -28,7 +28,18 @@ class JobSearchRequest(BaseModel):
         ge=1,
         le=100,
     )
+    @model_validator(mode="after")
+    def validate_experience_range(self):
+        if (
+            self.min_experience_years is not None
+            and self.max_experience_years is not None
+            and self.min_experience_years > self.max_experience_years
+        ):
+            raise ValueError(
+                "min_experience_years cannot be greater than max_experience_years"
+            )
 
+        return self
 
 class JobSearchResult(BaseModel):
     title: str
