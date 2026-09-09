@@ -1,3 +1,4 @@
+import logging
 from sqlalchemy.orm import Session
 
 from app.adapters.job_sources.base import JobSourceAdapter
@@ -8,6 +9,7 @@ from app.schemas.job_search_schema import (
     JobSearchResult,
 )
 
+logger = logging.getLogger(__name__)
 
 class JobSearchService:
 
@@ -21,7 +23,15 @@ class JobSearchService:
         seen: set[str] = set()
 
         for adapter in adapters:
-            adapter_results = adapter.search_jobs(criteria)
+            try:
+                adapter_results = adapter.search_jobs(criteria)
+
+            except Exception:
+                logger.exception(
+                    "Job source adapter failed: %s",
+                    adapter.__class__.__name__,
+                )
+                continue
 
             for job in adapter_results:
                 key = self._build_duplicate_key(job)
