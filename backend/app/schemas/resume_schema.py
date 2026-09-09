@@ -11,5 +11,11 @@ class ResumeResponse(BaseModel):
     content_type: str
     file_size: int
     created_at: datetime
+    extracted_text: str | None = None
 
     model_config = ConfigDict(from_attributes=True)
+
+class ResumeTextResponse(BaseModel):
+    resume_id: str
+    filename: str
+    extracted_text: str

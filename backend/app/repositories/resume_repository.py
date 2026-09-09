@@ -42,5 +42,30 @@ class ResumeRepository:
             .all()
         )
 
+    def get_by_id_and_user(
+        self,
+        db: Session,
+        resume_id: str,
+        user_id: str
+    ) -> Resume | None:
+
+        return (
+            db.query(Resume)
+            .filter(
+                Resume.id == resume_id,
+                Resume.user_id == user_id,
+            )
+            .first()
+        )
+
+    def delete(
+        self,
+        db: Session,
+        resume: Resume
+    ) -> None:
+
+        db.delete(resume)
+        db.commit()
+
 
 resume_repository = ResumeRepository()
